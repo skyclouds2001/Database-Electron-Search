@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="skyclouds2001@163.com">
+  <meta name="description" content="数据库大作业，学生信息管理系统，基于node和electron技术实现">
+  <meta name="keywords" content="database, mysql, sql, node, npm, git, electron, jquery, vscode, navicat">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="all">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+
+  <title>学生信息查询</title>
+
+  <link rel="stylesheet" type="text/css" href="index.css"/>
+
+  <script type="module" src="./addEventListener.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+</head>
+
+<body>
+  <div class="main">
+
+    <div class="nav" id="navbar">
+      <ul class="nav-list">
+        <li class="nav-list-item" data-id="1">检索学生信息</li>
+        <li class="nav-list-item" data-id="2">检索课程信息</li>
+        <li class="nav-list-item" data-id="3">插入学生信息</li>
+        <li class="nav-list-item" data-id="4">插入课程信息</li>
+        <li class="nav-list-item" data-id="5">删除学生信息</li>
+        <li class="nav-list-item" data-id="6">删除课程信息</li>
+        <li class="nav-list-item" data-id="7">修改学生信息</li>
+        <li class="nav-list-item" data-id="8">修改课程信息</li>
+        <li class="nav-list-item" data-id="9">选择学生课程</li>
+        <li class="nav-list-item" data-id="10">录入课程成绩</li>
+      </ul>
+    </div>
+
+    <div class="content">
+
+      <!-- 检索学生信息 -->
+      <div class="article" id="search-stu-info" style="display: none;">
+        <div class="form" id="search-stu-info-form">
+          <input id="search-stu-info-input" type="text" placeholder="请输入学生学号">
+          <button type="button" id="search-stu-info-btn">搜索</button>
+        </div>
+        <div id="search-stu-info-show">
+          <table class="show">
+            <tr>
+              <th class="show-item">姓名</th>
+              <td class="show-item"></td>
+              <th class="show-item">学号</th>
+              <td class="show-item"></td>
+              <th class="show-item">性别</th>
+              <td class="show-item"></td>
+            </tr>
+            <tr>
+              <th class="show-item">国籍</th>
+              <td class="show-item"></td>
+              <th class="show-item">户籍</th>
+              <td class="show-item"></td>
+              <th class="show-item">年级</th>
+              <td class="show-item"></td>
+            </tr>
+            <tr>
+              <th class="show-item">学院</th>
+              <td class="show-item"></td>
+              <th class="show-item">专业</th>
+              <td class="show-item"></td>
+              <th class="show-item">班级</th>
+              <td class="show-item"></td>
+            </tr>
+            <tr>
+              <th class="show-item">生日</th>
+              <td class="show-item"></td>
+              <th class="show-item">邮箱</th>
+              <td class="show-item"></td>
+              <th class="show-item">状态</th>
+              <td class="show-item"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 检索课程信息 -->
+      <div class="article" id="search-course-info" style="display: none;">
+        <div class="form">
+          <input id="search-course-info-input" type="text" placeholder="请输入课程ID">
+          <button type="button" id="search-course-info-btn">搜索</button>
+        </div>
+        <div id="search-course-info-show">
+          <table class="show">
+            <tr>
+              <th class="show-item">编号</th>
+              <td class="show-item"></td>
+              <th class="show-item">名称</th>
+              <td class="show-item"></td>
+              <th class="show-item">学分</th>
+              <td class="show-item"></td>
+            </tr>
+            <tr>
+              <th class="show-item">学时</th>
+              <td class="show-item"></td>
+              <th class="show-item">教师</th>
+              <td class="show-item"></td>
+              <th class="show-item">教室</th>
+              <td class="show-item"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 插入学生信息 -->
+      <div class="article" id="add-stu-info" style="display: none;">
+        <div id="add-stu-info-show">
+          <table class="show">
+            <tr>
+              <th class="show-item">姓名</th>
+              <td class="show-item" id="add-stu-info-name" contenteditable></td>
+              <th class="show-item">学号</th>
+              <td class="show-item" id="add-stu-info-id" contenteditable></td>
+              <th class="show-item">性别</th>
+              <td class="show-item" id="add-stu-info-sex" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">国籍</th>
+              <td class="show-item" id="add-stu-info-nation" contenteditable></td>
+              <th class="show-item">户籍</th>
+              <td class="show-item" id="add-stu-info-register" contenteditable></td>
+              <th class="show-item">年级</th>
+              <td class="show-item" id="add-stu-info-grade" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">学院</th>
+              <td class="show-item" id="add-stu-info-faculty" contenteditable></td>
+              <th class="show-item">专业</th>
+              <td class="show-item" id="add-stu-info-major" contenteditable></td>
+              <th class="show-item">班级</th>
+              <td class="show-item" id="add-stu-info-class" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">生日</th>
+              <td class="show-item" id="add-stu-info-birth" contenteditable></td>
+              <th class="show-item">邮箱</th>
+              <td class="show-item" id="add-stu-info-email" contenteditable></td>
+              <th class="show-item">状态</th>
+              <td class="show-item" id="add-stu-info-status" contenteditable></td>
+            </tr>
+          </table>
+        </div>
+        <div class="form">
+          <button type="button" id="add-stu-info-btn">添加</button>
+        </div>
+      </div>
+
+      <!-- 插入课程信息 -->
+      <div class="article" id="add-course-info" style="display: none;">
+        <div id="add-course-info-show">
+          <table class="show">
+            <tr>
+              <th class="show-item">编号</th>
+              <td class="show-item" id="add-course-info-ser" contenteditable></td>
+              <th class="show-item">名称</th>
+              <td class="show-item" id="add-course-info-name" contenteditable></td>
+              <th class="show-item">学分</th>
+              <td class="show-item" id="add-course-info-credit" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">学时</th>
+              <td class="show-item" id="add-course-info-per" contenteditable></td>
+              <th class="show-item">教师</th>
+              <td class="show-item" id="add-course-info-tea" contenteditable></td>
+              <th class="show-item">教室</th>
+              <td class="show-item" id="add-course-info-room" contenteditable></td>
+            </tr>
+          </table>
+        </div>
+        <div class="form">
+          <button type="button" id="add-course-info-btn">添加</button>
+        </div>
+      </div>
+
+      <!-- 删除学生信息 -->
+      <div class="article" id="delete-stu-info" style="display: none;">
+        <div class="form">
+          <input id="delete-stu-info-input" type="text" placeholder="请输入学生学号">
+          <button type="button" id="delete-stu-info-btn">删除</button>
+        </div>
+      </div>
+
+      <!-- 删除课程信息 -->
+      <div class="article" id="delete-course-info" style="display: none;">
+        <div class="form">
+          <input id="delete-course-info-input" type="text" placeholder="请输入课程编号">
+          <button type="button" id="delete-course-info-btn">删除</button>
+        </div>
+      </div>
+
+      <!-- 修改学生信息 -->
+      <div class="article" id="fix-stu-info" style="display: none;">
+        <div id="fix-stu-info-show">
+          <table class="show">
+            <tr>
+              <th class="show-item">姓名</th>
+              <td class="show-item" id="fix-stu-info-name" contenteditable></td>
+              <th class="show-item">学号</th>
+              <td class="show-item" id="fix-stu-info-id" contenteditable></td>
+              <th class="show-item">性别</th>
+              <td class="show-item" id="fix-stu-info-sex" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">国籍</th>
+              <td class="show-item" id="fix-stu-info-nation" contenteditable></td>
+              <th class="show-item">户籍</th>
+              <td class="show-item" id="fix-stu-info-register" contenteditable></td>
+              <th class="show-item">年级</th>
+              <td class="show-item" id="fix-stu-info-grade" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">学院</th>
+              <td class="show-item" id="fix-stu-info-faculty" contenteditable></td>
+              <th class="show-item">专业</th>
+              <td class="show-item" id="fix-stu-info-major" contenteditable></td>
+              <th class="show-item">班级</th>
+              <td class="show-item" id="fix-stu-info-class" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">生日</th>
+              <td class="show-item" id="fix-stu-info-birth" contenteditable></td>
+              <th class="show-item">邮箱</th>
+              <td class="show-item" id="fix-stu-info-email" contenteditable></td>
+              <th class="show-item">状态</th>
+              <td class="show-item" id="fix-stu-info-status" contenteditable></td>
+            </tr>
+          </table>
+        </div>
+        <div class="form">
+          <button type="button" id="fix-stu-info-btn">修改</button>
+        </div>
+      </div>
+
+      <!-- 修改课程信息 -->
+      <div class="article" id="fix-course-info" style="display: none;">
+        <div id="fix-course-info-show">
+          <table class="show">
+            <tr>
+              <th class="show-item">编号</th>
+              <td class="show-item" id="fix-course-info-ser" contenteditable></td>
+              <th class="show-item">名称</th>
+              <td class="show-item" id="fix-course-info-name" contenteditable></td>
+              <th class="show-item">学分</th>
+              <td class="show-item" id="fix-course-info-credit" contenteditable></td>
+            </tr>
+            <tr>
+              <th class="show-item">学时</th>
+              <td class="show-item" id="fix-course-info-per" contenteditable></td>
+              <th class="show-item">教师</th>
+              <td class="show-item" id="fix-course-info-tea" contenteditable></td>
+              <th class="show-item">教室</th>
+              <td class="show-item" id="fix-course-info-room" contenteditable></td>
+            </tr>
+          </table>
+        </div>
+        <div class="form">
+          <button type="button" id="fix-course-info-btn">修改</button>
+        </div>
+      </div>
+
+      <!-- 学生选课操作 -->
+      <div class="article" id="choose-stu-course" style="display: none;">
+        <div class="form">
+          <input id="stu-choose-course-cou-input" type="text" placeholder="请输入课程编号">
+          <input id="stu-choose-course-stu-input" type="text" placeholder="请输入学生学号">
+          <button type="button" id="stu-choose-course-btn">选课</button>
+        </div>
+      </div>
+
+      <!-- 录入课程成绩 -->
+      <div class="article" id="add-course-score" style="display: none;">
+        <div class="form">
+          <input id="add-course-score-cou-input" type="text" placeholder="请输入课程编号">
+          <input id="add-course-score-stu-input" type="text" placeholder="请输入学生学号">
+          <input id="add-course-score-score-input" type="text" placeholder="请输入学生对应课程的成绩">
+          <button type="button" id="add-course-score-btn">录入</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
