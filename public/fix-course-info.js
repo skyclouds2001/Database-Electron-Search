@@ -17,9 +17,9 @@ export default function () {
       document.getElementById('fix-course-info-per').innerHTML = '';
       document.getElementById('fix-course-info-tea').innerHTML = '';
       document.getElementById('fix-course-info-room').innerHTML = '';
-      alert('添加成功');
+      alert('修改成功');
     } else {
-      alert('添加失败');
+      alert('修改失败');
     }
   });
 };

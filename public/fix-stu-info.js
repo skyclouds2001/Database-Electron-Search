@@ -29,9 +29,9 @@ export default function () {
       document.getElementById('fix-stu-info-birth').innerHTML = '';
       document.getElementById('fix-stu-info-email').innerHTML = '';
       document.getElementById('fix-stu-info-status').innerHTML = '';
-      alert('添加成功');
+      alert('修改成功');
     } else {
-      alert('添加失败');
+      alert('修改失败');
     }
   });
 };

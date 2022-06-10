@@ -64,6 +64,12 @@ body {
   color: white;
 }
 
+.select {
+  background-color: rgb(0, 94, 165);
+
+  color: white;
+}
+
 .content {
   width: 80%;
   height: 100%;
