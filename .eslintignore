@@ -3,6 +3,7 @@
 Thumbs.db
 $RECYCLE.BIN/
 .vscode/
+.idea/
 
-# Node.js
+# node
 node_modules/

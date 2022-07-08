@@ -4,7 +4,8 @@
   "description": "数据库大作业：做一个程序界面，实现检索，实现学生/课程的插入、删除、修改等，实现选课，实现课程成绩的录入",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager ./ 学生信息查询 --name=学生信息查询 --platform=win32 --icon=./asserts/database.ico --out=./dist --app-version=1.0.0"
   },
   "keywords": [
     "database",
@@ -15,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^19.0.1",
+    "electron-packager": "^15.5.1",
     "eslint": "^8.16.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
